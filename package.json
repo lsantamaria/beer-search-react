@@ -17,14 +17,12 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-axios-middleware": "^4.0.1",
-    "redux-logger": "^3.0.6",
-    "redux-persist": "^5.10.0",
-    "redux-thunk": "^2.3.0"
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,5 +40,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }

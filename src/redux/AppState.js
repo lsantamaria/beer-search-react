@@ -1,7 +1,7 @@
 import {urls} from "../common/constants";
 
 type AppStateType = {
-  beersList: [],
+  beerList: [],
   loading: boolean
 };
 
@@ -11,7 +11,7 @@ type ActionType = {
 };
 
 export const initialState: AppStateType = {
-  beersList: [],
+  beerList: [],
   loading:false,
 };
 
@@ -19,12 +19,12 @@ export const SEARCH_BEERS = 'AppState/SEARCH_BEERS';
 export const SEARCH_BEERS_SUCCESS = 'AppState/SEARCH_BEERS_SUCCESS';
 export const SEARCH_BEERS_FAIL = 'AppState/SEARCH_BEERS_FAIL';
 
-export function searchBeers(name): ActionType {
+export function searchBeers(mealName): ActionType {
   return {
     type: SEARCH_BEERS,
     payload: {
       request: {
-        url: urls.SEARCH_URL,
+        url: urls.GET_BEERS_BY_FOOD_URL + mealName,
         method: 'GET',
       }
     }
@@ -37,11 +37,17 @@ export default function AppStateReducer(
 ): AppStateType {
   switch (action.type) {
     case SEARCH_BEERS:
-      return {...state, loading:true};
+      return {...state};
     case SEARCH_BEERS_SUCCESS:
-      return {...state, beersList: action.payload.data, loading:false};
+      const beerList = action.payload.data;
+      if(beerList.length === 0){
+        return {...state, beerList: [], errorMessage:"No beers were found for this meal"};
+      }
+      else{
+        return {...state, beerList: action.payload.data, errorMessage:""};
+      }
     case SEARCH_BEERS_FAIL:
-      return {...state, loading:false};
+      return {...state, errorMessage:"Error fetching beers from API"};
     default:
       return state;
   }

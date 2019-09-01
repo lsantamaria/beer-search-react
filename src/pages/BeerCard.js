@@ -23,7 +23,7 @@ export const BeerCard = (props) => {
   const classes = useStyles();
   const beer = props.beer;
     return (
-          <ListItem alignItems="flex-start">
+          <ListItem key={beer.id} alignItems="flex-start">
             <ListItemAvatar>
               <Avatar src={beer.image_url} />
             </ListItemAvatar>
@@ -39,7 +39,7 @@ export const BeerCard = (props) => {
                     >
                       {beer.first_brewed}
                     </Typography>
-                    {beer.description}
+                    {" - " + beer.description}
                   </React.Fragment>
                 }
             />

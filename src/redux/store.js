@@ -1,38 +1,27 @@
 import {applyMiddleware, createStore, compose} from 'redux';
-import {persistStore, persistReducer} from 'redux-persist';
-import thunkMiddleware from 'redux-thunk';
+import {createLogger} from 'redux-logger';
 import reducer from './reducer';
-import axios, {AxiosPromise} from "axios";
+import axios from "axios";
 import axiosMiddleware from 'redux-axios-middleware';
-import {urls} from "../common/constants";
-import storage from 'redux-persist/lib/storage';
 
-const client = axios.create({
-  baseURL: urls.SEARCH_URL,
-});
+const client = axios.create();
 
-const enhancer =
+const enhancers = [
   applyMiddleware(
-      thunkMiddleware,
       axiosMiddleware(client, {
         returnRejectedPromiseOnError: true
-      })
-  );
+      }),
+      createLogger({
+        collapsed: true,
+      }),
+  ),
+];
 
-// const composeEnhancers =
-//     (__DEV__ &&
-//         typeof window !== 'undefined' &&
-//         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-//     compose;
-//
-// const enhancer = composeEnhancers(...enhancers);
+const composeEnhancers =
+    (typeof window !== 'undefined' &&
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+    compose;
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: [],
-};
+const enhancer = composeEnhancers(...enhancers);
 
-const persistedReducer = persistReducer(persistConfig, reducer);
-export const store = createStore(persistedReducer, {}, enhancer);
-export const persistor = persistStore(store);
+export const store = createStore(reducer, {}, enhancer);

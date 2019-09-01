@@ -15,7 +15,6 @@ describe('search component tests', () => {
     wrapper.setState({mealName: testMealName});
 
     wrapper.find('button').at(0).simulate('click');
-    console.log(wrapper.find('button'));
     expect(searchBeersMock).toHaveBeenCalledWith(testMealName)
   });
 

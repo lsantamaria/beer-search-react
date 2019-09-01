@@ -5,6 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
+import {urls as constants} from "../common/constants";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -25,7 +26,7 @@ export const BeerCard = (props) => {
     return (
           <ListItem key={beer.id} alignItems="flex-start">
             <ListItemAvatar>
-              <Avatar src={beer.image_url} />
+              <Avatar src={beer.image_url || constants.DEFAULT_BEER_IMAGE_URL} />
             </ListItemAvatar>
             <ListItemText
                 primary={beer.name}

@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import {Container} from "@material-ui/core";
 import {searchStyles} from "./searchStyles";
 import TextField from "@material-ui/core/TextField";
-import {BeerCard} from "./BeerCard";
+import {BeerCard} from "../components/BeerCard";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import Box from "@material-ui/core/Box";
@@ -12,17 +12,16 @@ import Typography from '@material-ui/core/Typography';
 const SearchButton = props => {
   const classes = searchStyles();
   return (
-      <Button variant="contained"
-              color="secondary"
+      <Button color="secondary"
+              variant="contained"
               className={classes.button}
-              onClick={props.onSearch}
-      >
+              onClick={props.onSearch}>
         Search Beers!
-      </Button>
+        </Button>
   )
 };
 
-const BeerList = props => {
+export const BeerList = props => {
   const items = props.items;
   return (
       <List>
@@ -46,6 +45,10 @@ export default class Search extends React.Component {
     this.setState({mealName: event.target.value});
   };
 
+  onSearch = () => {
+    this.props.searchBeers(this.state.mealName);
+  };
+
   render() {
 
     return (
@@ -60,8 +63,7 @@ export default class Search extends React.Component {
                 onChange={this.onChangeText}
                 margin="normal"
             />
-            <SearchButton onSearch={() =>
-                this.props.searchBeers(this.state.mealName)}/>
+            <SearchButton onSearch={this.onSearch}/>
           </Box>
           {this.props.errorMessage ?
               <Typography component="div" color="error">

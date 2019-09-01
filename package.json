@@ -7,14 +7,13 @@
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "latest",
     "axios": "^0.19.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "clsx": "latest",
     "prop-types": "latest",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
-    "react-router": "^2.0.0",
     "react-scripts": "3.1.1",
-    "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-axios-middleware": "^4.0.1",
     "redux-logger": "^3.0.6"
@@ -41,6 +40,9 @@
     ]
   },
   "devDependencies": {
-    "jest": "^24.9.0"
+    "babel-jest": "^24.9.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.8.0"
   }
 }

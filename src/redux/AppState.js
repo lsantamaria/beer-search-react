@@ -1,16 +1,16 @@
 import {urls} from "../common/constants";
 
-type AppStateType = {
+export type appStateType ={
   beerList: [],
   loading: boolean
 };
 
-type ActionType = {
+export type actionType ={
   type: string,
   payload?: any,
 };
 
-export const initialState: AppStateType = {
+export const initialState: appStateType = {
   beerList: [],
   loading:false,
 };
@@ -19,7 +19,7 @@ export const SEARCH_BEERS = 'AppState/SEARCH_BEERS';
 export const SEARCH_BEERS_SUCCESS = 'AppState/SEARCH_BEERS_SUCCESS';
 export const SEARCH_BEERS_FAIL = 'AppState/SEARCH_BEERS_FAIL';
 
-export function searchBeers(mealName): ActionType {
+export function searchBeers(mealName): actionType {
   return {
     type: SEARCH_BEERS,
     payload: {
@@ -32,9 +32,9 @@ export function searchBeers(mealName): ActionType {
 }
 
 export default function AppStateReducer(
-  state: AppStateType = initialState,
-  action: ActionType,
-): AppStateType {
+  state: appStateType = initialState,
+  action: actionType,
+): appStateType {
   switch (action.type) {
     case SEARCH_BEERS:
       return {...state};
